@@ -4,7 +4,7 @@ pipeline {
 			image 'alpine:latest' 
 		}
 	}
-	paramenters {
+	parameters {
 	string(name: 'NAME')
 	string(name: 'AGE')
 	}
