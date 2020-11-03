@@ -1,7 +1,3 @@
-def saveAndPrintDate(filename = '') {​​
-	sh "date > $filename && cat $filename"
-}​​
-
 pipeline {
     agent { 
 		docker { 
@@ -9,12 +5,16 @@ pipeline {
 		}
 	}
     stages {
-		stage('Print') {
+        stage('build') {
             steps {
-                saveAndPrintDate("Output1")
-				sh 'sleep 10s'
-				saveAndPrintDate("Output2")
+            	saveAndPrintDate("test")
+                sh "sleep 10s"
+                saveAndPrintDate("test2")
             }
         }
     }
+}
+
+def saveAndPrintDate(filename = '') {
+	sh "date > $filename && cat $filename"
 }
