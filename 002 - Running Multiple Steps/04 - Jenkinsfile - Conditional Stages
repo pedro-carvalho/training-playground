@@ -4,6 +4,21 @@ pipeline {
 			image 'alpine:latest' 
 		}
 	}
+	parameters {
+		choise(name: 'STAGE', choices:['build','test'] description: 'Stage')
+	}
     stages {
+        stage('build') {
+			when{environment name: 'STAGE', value: 'build'}
+            steps {
+                sh "echo building"
+            }
+        }
+		stage('test') {
+			when{environment name: 'STAGE', value: 'test'}
+            steps {
+                sh "echo testing"
+            }
+        }
     }
 }
