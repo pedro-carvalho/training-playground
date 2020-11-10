@@ -1,9 +1,46 @@
 pipeline {
     agent { 
-		docker { 
-			image 'alpine:latest' 
-		}
-	}
+        docker { 
+            image 'alpine:latest' 
+        }
+    }
+    environment {
+        NUMBER_OF_ISSUES_TEST1 = "0"
+        NUMBER_OF_ISSUES_TEST2 = "0"
+        NUMBER_OF_ISSUES_TEST3 = "0"
+    }
     stages {
+        stage('test') {
+            steps {
+                sh "NUMBER_OF_ISSUES_TEST1=10"
+                
+                script {
+                    echo "Value of env.NUMBER_OF_ISSUES_TEST2 before update: " + env.NUMBER_OF_ISSUES_TEST2 
+                    env.NUMBER_OF_ISSUES_TEST2=10
+                    echo "Value of env.NUMBER_OF_ISSUES_TEST2 after update " + env.NUMBER_OF_ISSUES_TEST2  
+                    
+                
+                    
+                    echo "Value of env.NUMBER_OF_ISSUES_TEST3 before update: " + env.NUMBER_OF_ISSUES_TEST3
+                    NUMBER_OF_ISSUES_TEST3=10
+                    echo "Value of env.NUMBER_OF_ISSUES_TEST3 after update " + env.NUMBER_OF_ISSUES_TEST3
+                
+                
+                    
+                    echo "Value of env.NUMBER_OF_ISSUES_TEST4 before update: " + env.NUMBER_OF_ISSUES_TEST4
+                    env.NUMBER_OF_ISSUES_TEST4=10
+                    echo "Value of env.NUMBER_OF_ISSUES_TEST4 after update " + env.NUMBER_OF_ISSUES_TEST4
+                }
+            }
+        }
+        stage('notification') {
+            steps {
+                echo "Notification TEST1: $NUMBER_OF_ISSUES_TEST1"   
+                echo "Notification TEST2: $NUMBER_OF_ISSUES_TEST2"    
+                echo "Notification TEST3: $NUMBER_OF_ISSUES_TEST3"    
+                echo "Notification TEST4: $NUMBER_OF_ISSUES_TEST4"   
+                echo "Notification TEST5: $NUMBER_OF_ISSUES_TEST5" 
+            }
+        }
     }
 }
