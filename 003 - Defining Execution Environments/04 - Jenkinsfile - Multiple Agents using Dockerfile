@@ -2,18 +2,22 @@ pipeline {
     agent none
     stages {
 		stage('build') {
-			agent dockerfile {
+			agent{
+				dockerfile {
 					filename 'DockerFileMaven'
 					dir '003 - Defining Execution Environments'
+				}
 			}
             steps {
             	sh "mvn --version"
             }
         }
 		stage('mirra') {
-			agent dockerfile {
+			agent{
+				dockerfile {
 					filename 'DockerFileNode'
 					dir '003 - Defining Execution Environments'
+				}
 			}
             steps {
 				sh "npm --version"
